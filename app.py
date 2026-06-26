@@ -4,38 +4,25 @@ import pandas as pd
 # ایپ کی سیٹنگ
 st.set_page_config(page_title="Heart Health Checker", page_icon="❤️", layout="centered")
 
-# --- Custom CSS برائے جدید کلر تھیم ---
-st.markdown(f"""
+# --- Custom CSS برائے جدید پروفیشنل لُک ---
+st.markdown("""
     <style>
-    /* بیک گراؤنڈ کلر */
-    .stApp {{ background-color: #F8FAFC; }}
+    /* مین بیک گراؤنڈ */
+    .stApp { background-color: #f4f7f9; }
     
-    /* ہیڈنگز */
-    h1 {{ color: #1D3557; text-align: center; font-family: 'Segoe UI', sans-serif; }}
+    /* ہیڈنگ اسٹائل */
+    h1 { color: #1a2a6c; text-align: center; font-family: 'Arial', sans-serif; }
     
-    /* بٹن اسٹائل (Primary Red) */
-    .stButton > button {{ 
-        background-color: #E63946; 
-        color: white; 
-        border-radius: 8px; 
-        font-weight: bold; 
-        width: 100%; 
-        border: none; 
-        padding: 12px; 
-    }}
-    .stButton > button:hover {{ background-color: #d62839; color: white; }}
+    /* بٹن اسٹائل */
+    .stButton > button { 
+        background: linear-gradient(90deg, #1a2a6c, #b21f1f); 
+        color: white; border-radius: 10px; font-weight: bold; 
+        width: 100%; border: none; padding: 12px; transition: 0.3s;
+    }
+    .stButton > button:hover { transform: scale(1.02); }
     
-    /* کارڈ اسٹائل (White Background) */
-    div[data-testid="stVerticalBlock"] > div {{ 
-        background-color: #FFFFFF; 
-        padding: 20px; 
-        border-radius: 10px; 
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
-    }}
-    
-    /* ایکسنٹ کلر (Accent #457B9D) */
-    .stSuccess {{ background-color: #2ECC71; color: white; }}
-    .stError {{ background-color: #E63946; color: white; }}
+    /* ان پٹ فیلڈز کا لُک */
+    div[data-testid="stNumberInput"], div[data-testid="stSelectbox"] { border-radius: 8px; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -65,6 +52,7 @@ tab1, tab2 = st.tabs([tab1_name, tab2_name])
 
 with tab1:
     gender = st.radio(labels["gender"], [opt_male, opt_female], horizontal=True)
+    
     col1, col2 = st.columns(2)
     with col1:
         age = st.number_input(labels["age"], 0, 100, 30)
