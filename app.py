@@ -4,22 +4,30 @@ import pandas as pd
 # ایپ کی سیٹنگ
 st.set_page_config(page_title="Heart Health Checker", page_icon="❤️", layout="centered")
 
-# --- Custom CSS برائے جدید اور پروفیشنل میڈیکل لُک ---
+# --- Custom CSS برائے جدید پروفیشنل لُک ---
 st.markdown("""
     <style>
-    .stApp { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); }
-    h1 { color: #1e3799; text-align: center; font-weight: 800; padding-bottom: 20px; }
+    /* مین بیک گراؤنڈ */
+    .stApp { background-color: #f4f7f9; }
+    
+    /* ہیڈنگ اسٹائل */
+    h1 { color: #1a2a6c; text-align: center; font-family: 'Arial', sans-serif; }
+    
+    /* بٹن اسٹائل */
     .stButton > button { 
-        background: linear-gradient(90deg, #0097e6, #273c75); 
-        color: white; border-radius: 15px; font-weight: bold; 
+        background: linear-gradient(90deg, #1a2a6c, #b21f1f); 
+        color: white; border-radius: 10px; font-weight: bold; 
         width: 100%; border: none; padding: 12px; transition: 0.3s;
     }
     .stButton > button:hover { transform: scale(1.02); }
+    
+    /* ان پٹ فیلڈز کا لُک */
+    div[data-testid="stNumberInput"], div[data-testid="stSelectbox"] { border-radius: 8px; }
     </style>
 """, unsafe_allow_html=True)
 
 # زبان کا انتخاب
-lang = st.sidebar.selectbox("🌐 Select Language / زبان منتخب کریں", ["English", "Urdu"])
+lang = st.sidebar.selectbox("🌐 Language / زبان", ["English", "Urdu"])
 
 # ٹیکسٹ ڈیٹا
 if lang == "Urdu":
@@ -43,7 +51,6 @@ st.title(title)
 tab1, tab2 = st.tabs([tab1_name, tab2_name])
 
 with tab1:
-    # جینڈر کا انتخاب
     gender = st.radio(labels["gender"], [opt_male, opt_female], horizontal=True)
     
     col1, col2 = st.columns(2)
@@ -58,16 +65,13 @@ with tab1:
 
     if st.button(btn_txt):
         risks = []
-        
-        # جینڈر کی بنیاد پر طبی رینج کا تعین
         if gender == opt_male:
             if rbp > 135: risks.append("High Blood Pressure (Male > 135)")
             if chol > 220: risks.append("High Cholesterol (Male > 220)")
-        else: # Female
+        else:
             if rbp > 125: risks.append("High Blood Pressure (Female > 125)")
             if chol > 210: risks.append("High Cholesterol (Female > 210)")
-
-        # مشترکہ رینج
+        
         if mhr < 100: risks.append("Low Heart Rate")
         if eia == opt_yes: risks.append("Chest pain during exercise")
 
